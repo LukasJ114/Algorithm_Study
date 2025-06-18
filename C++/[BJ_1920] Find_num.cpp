@@ -4,7 +4,7 @@ Title           : 수 찾기
 Question Index  : 1920
 Link            : https://www.acmicpc.net/problem/1920
 
-Prosess         : 푸는 중
+Prosess         : 푸는 중 (시간초과)
 
 */
 /*
@@ -51,8 +51,9 @@ int main(void){
     for (int i = 0; i < m; ++i){
         cin >> x_Arr[i];
 
-        int tmp = find(a_Arr.begin(), a_Arr.end(), x_Arr[i]) - a_Arr.begin();
-        if (tmp == n) cout << 0 <<"\n";
+        // int tmp = find(a_Arr.begin(), a_Arr.end(), x_Arr[i]) - a_Arr.begin();
+        // if (tmp == n) cout << 0 <<"\n";
+        if ((find(a_Arr.begin(), a_Arr.end(), x_Arr[i])) == a_Arr.end() ) cout << 0 << "\n";
         else cout << 1 << "\n";
     }
 
