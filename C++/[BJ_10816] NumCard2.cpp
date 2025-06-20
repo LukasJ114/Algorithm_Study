@@ -4,7 +4,7 @@ Title           : 숫자 카드 2
 Question Index  : 10816
 Link            : https://www.acmicpc.net/problem/10816
 
-Prosess         : 푸는 중
+Prosess         : 완료
 */
 /*
 # Input
