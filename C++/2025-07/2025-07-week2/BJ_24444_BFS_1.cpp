@@ -1,6 +1,6 @@
 /*
 Platform        : 백준
-Title           : 단지번호붙이기
+Title           : 알고리즘 수업 - 너비 우선 탐색 1
 Question Index  : 24444
 Link            : https://www.acmicpc.net/problem/24444
 */
