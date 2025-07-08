@@ -17,40 +17,34 @@ using namespace std;
 int N, M, R;
 
 // V : 정점 집합, E : 간선 집합, R : 시작 정점
-void BFS(vector<int> V, vector<vector<int>> E, int R, vector<int> cnt){
-    // map<int, bool> visited;
+void BFS(vector<vector<int>> &E, int R, vector<int> &cnt){
     vector<bool> visited(N+1, 0);
-    // for(auto v : V){
-    //     visited[v] = false;
-    // }
-    visited[R] = true;
     queue<int> Q;
+
+    //! 1. 처음 방문한 노드 체크 및 큐에 추가
+    visited[R] = true;
     Q.push(R);
     
     int visitCount = 1; // 방문 카운트 저장을 위한 카운터
+    //! 2. 탐색 시작 (큐에 있는 순서대로 방문)
     while(!Q.empty()){
         int u = Q.front();
+        //! 2-1. 각 노드에 몇번째 방문했는지 체크
         cnt[u] = visitCount++;
         Q.pop();
 
-        // for (auto v : E[u]){     // v : u 노드에 엣지로 연결된 노드.
-        //     if(!visited[v]){
-        //         visited[v] = true;
-        //         Q.push(v);
-        //     }
-        // }
-        for (int i = 1; i <= N; i++){
-            bool edgeCheck = E[u][i];      // tmp = 1 or 0 // u와 i의 엣지 유무
-            if(edgeCheck && !visited[i]){       // 엣지가 있고, 방문한 적이 없어야 한다.
-                visited[i] = true;
-                Q.push(i);
+        //!  2-2. 방문한 노드와 연결된 노드를 큐에 추가
+        for (auto v : E[u]){     // v : u 노드에 엣지로 연결된 노드.
+            if(!visited[v]){
+                visited[v] = true;
+                Q.push(v);
             }
         }
-
     }
 
+    //! 3. 출력
     for(int i = 1; i <= N; i++){
-        cout << cnt[i] << endl;
+        cout << cnt[i] << "\n";
     }
 
 }
@@ -62,25 +56,30 @@ int main(void){
 
     cin >> N >> M >> R;
     
-    // Node 집합 선언
-    vector<int> V;
-    for(int i = 1; i <= N; i++){
-        V.push_back(i);
-    }
+    // //* Node 집합 선언
+    // vector<int> V;
+    // for(int i = 1; i <= N; i++){
+    //     V.push_back(i);
+    // }
 
-    // 각 노드에 몇번째로 방문했는지 카운트
+    //* 각 노드에 몇번째로 방문했는지 카운트
     vector<int> cnt(N+1,0);
 
-    // Edge 집합 선언
-    vector <vector<int>> E(N+1, vector<int>(N+1,0));
+    //* Edge 집합 선언
+    vector <vector<int>> E(N+1, vector<int>());
     int tmpA, tmpB;
     for (int i = 0; i < M; i++){
         cin >> tmpA >> tmpB;
-        E[tmpA][tmpB] = 1;      // 엣지가 있는 곳은 1로 표현
-        E[tmpB][tmpA] = 1;
+        E[tmpA].push_back(tmpB);
+        E[tmpB].push_back(tmpA);
+    }
+
+    //* 노드 별로 연결된 노드 오름차순 정렬
+    for (int i = 1; i <= N; i++){
+        sort(E[i].begin(), E[i].end());
     }
 
     
-    BFS(V, E, R, cnt);
+    BFS(E, R, cnt);
 
 }
