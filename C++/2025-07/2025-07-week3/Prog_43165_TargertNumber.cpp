@@ -10,23 +10,23 @@ Link            : https://school.programmers.co.kr/learn/courses/30/lessons/4316
 #include <string>
 
 using namespace std;
-
-void BFS(int numOfNumbs){
-    if(numOfNumbs )
+// numbers : 주어진 숫자들, &target : 목표값(RO), nowSum : 계산값, deep : 몇번째 들어온 건지
+void DFS(vector<int> numbers, int &target, int nowSum, int deep, int &answer){
+    int numOfNumbs = numbers.size();
+    if(deep >= numOfNumbs){
+        // BFS END
+        if (nowSum == target) answer++;
+        return;
+    }
+    DFS(numbers, target, nowSum + numbers[deep], deep+1, answer);
+    DFS(numbers, target, nowSum - numbers[deep], deep+1, answer);
+    
 }
 
 int solution(vector<int> numbers, int target){
     int answer = 0;
     int numOfNumbs = numbers.size();
-
+    int sum = 0;
+    DFS(numbers, target, sum, 0, answer);
     return answer;
-}
-
-int main(void){
-    vector<int> numbers = {1,1,1,1,1};
-    int target = 3;
-
-
-    cout << solution(numbers, target);
-
 }
