@@ -9,26 +9,34 @@ Link            : https://school.programmers.co.kr/learn/courses/30/lessons/4316
 #include <vector>
 
 using namespace std;
+vector<bool> visited;
 
-void DFS(vector<vector<int>> &computers, vector<bool> &visited, int node, int &answer, int n){
-    answer++;
+void DFS(vector<vector<int>> &computers,  int node, int n){
     visited[node] = 1;
+    
     for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++)
-            if(computers[i][j] && !visited[j]){
-                DFS(computers, visited, i, answer, n);
-            }
+        
+        if(computers[node][i] && !visited[i]){
+            DFS(computers, i,  n);
+        
+        }
     }
     
-    
-}
+} 
 
 int solution(int n, vector<vector<int>> computers) {
     int answer = 0;
-    vector<bool> visited(3,0);
+    visited.resize(n,0);
     
-    // 0번째 인덱스 부터 시작
-    DFS(computers, visited, 0, answer, n);
+    for(int i = 0; i < n; i++){
+        if(!visited[i]){
+            DFS(computers, i, n);
+            
+            answer++;
+        }
+        
+    }
+
     
     return answer;
 }
