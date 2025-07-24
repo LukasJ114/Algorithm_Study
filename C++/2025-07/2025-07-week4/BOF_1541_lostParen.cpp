@@ -8,32 +8,43 @@ Link            : https://www.acmicpc.net/problem/1541
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
-vector<string> inString(50);
-void Input(){
-    string input;
-    cin >> input;
-
-    int tmpSum = 0, cnt = 0;
-    for(auto c : input){
-        if(c == '+' || c == '-'){
-            inString[cnt] = tmpSum + '0';
-            cnt++;
-            inString[cnt] = c;
-            cnt++;
-        }
-        else{
-            tmpSum += c - '0';
-        }
-    }
-
-}
-
 
 int main(void){
 
-    Input();
-    for(int i = 0; i <= 50; i++) cout << inString[i] << " ";
+    string input;
+    cin >> input;
+
+    int Sum = 0;
+
+    string eachNum;
+    bool meetMinus = 0;     // Minus가 등장했는가? (1 : 등장했음 / 2 : 등장한 적 없음)
+    input+='+';
+
+    for(char c : input){
+        // cout << "[c = " << c << "]" << endl;
+        if(c == '+' || c == '-'){
+            if(!meetMinus){ // +
+                // cout << eachNum << endl;
+                Sum += stoi(eachNum);
+                eachNum = "";
+            }   
+            else{   // -
+                // cout << eachNum << endl;
+                Sum -= stoi(eachNum);
+                eachNum = "";
+            }
+
+        }
+        else{
+            eachNum += c;
+        }
+
+        if(c == '-') meetMinus = 1;
+    }
+
+    cout << Sum;
 
 }
