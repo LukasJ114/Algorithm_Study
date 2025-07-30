@@ -38,7 +38,7 @@ int main(void){
     // printSchedules();
 
     for (int i = 1; i <= N; i++){
-        if(schedules[i].money == 0) schedules[i].money = schedules[i-1].money;
+        if(schedules[i].money == 0 || schedules[i].money < schedules[i-1].money) schedules[i].money = schedules[i-1].money;
 
         // 범위 넘어가는 경우 차단
         if(((i-1) + schedules[i].time) > N) continue;
