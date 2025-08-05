@@ -35,7 +35,7 @@ int main(void){
 
         pq.pop();
 
-        if(currTime >= timeTable[currPos]) continue;
+        if(currTime > timeTable[currPos]) continue;
 
         if(currPos == K) break;
 
