@@ -22,6 +22,7 @@ void Input(){
 }
 
 int main(void){
+    Input();
     vector<int> timeTable(100001, 999999);
     
     timeTable[N] = 0;
